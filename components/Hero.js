@@ -81,7 +81,7 @@ export default function Hero() {
   const circleRef  = useRef(null)
 
   useScramble(line1Ref, 'Maimunah', 300)
-  useScramble(line2Ref, 'Tabassum', 700)
+  useScramble(line2Ref, 'Tabassum', 500)
 
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
