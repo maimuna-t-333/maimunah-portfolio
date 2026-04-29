@@ -32,31 +32,40 @@ export default function Skills() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="skills" className="px-8 md:px-16 py-20 md:py-32 bg-cream2">
-
+    <section
+      ref={sectionRef}
+      id="skills"
+      className="px-5 md:px-16 py-14 md:py-32 bg-cream2"
+    >
       <h2
-        className="font-serif leading-[0.95] tracking-tight mb-12 md:mb-16"
-        style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}
+        className="font-serif leading-[0.95] tracking-tight mb-8 md:mb-16"
+        style={{ fontSize: 'clamp(2.2rem, 6vw, 6rem)' }}
       >
         My <em className="italic text-red">toolkit</em>
       </h2>
 
-     <div
-  ref={gridRef}
-  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border border-border"
->
-        {SKILLS.map((group, i) => (
+      {/*
+        Border strategy: container provides top + left edges,
+        every card provides its own right + bottom edge.
+        This means the grid looks correct at 1, 2, or 4 columns
+        without any index-based conditional logic.
+      */}
+      <div
+        ref={gridRef}
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-l border-border"
+      >
+        {SKILLS.map(group => (
           <div
-  key={group.title}
-  className={`p-8 md:p-10 bg-cream border-b border-border ${i < SKILLS.length - 1 ? 'border-r' : ''}`}
->
-            <div className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted mb-8 pb-4 border-b border-border">
+            key={group.title}
+            className="p-6 md:p-10 bg-cream border-r border-b border-border"
+          >
+            <div className="font-mono text-[10px] tracking-[0.15em] uppercase text-muted mb-6 md:mb-8 pb-4 border-b border-border">
               {group.title}
             </div>
             {group.items.map(item => (
               <div
                 key={item}
-                className="flex justify-between items-center py-2.5 border-b border-cream2 last:border-0 text-[0.95rem] text-ink hover:text-red hover:translate-x-1 group/item transition-all duration-300 ease-out cursor-default"
+                className="flex justify-between items-center py-2.5 border-b border-cream2 last:border-0 text-[0.9rem] md:text-[0.95rem] text-ink hover:text-red hover:translate-x-1 group/item transition-all duration-300 ease-out cursor-default"
               >
                 {item}
                 <span className="w-1.5 h-1.5 bg-red rounded-full opacity-0 scale-50 group-hover/item:opacity-100 group-hover/item:scale-100 transition-all duration-300 flex-shrink-0" />
@@ -65,7 +74,8 @@ export default function Skills() {
           </div>
         ))}
       </div>
-      <div className="flex justify-between items-center mt-10 pt-5 border-t border-border">
+
+      <div className="flex justify-between items-center mt-8 md:mt-10 pt-5 border-t border-border">
         <span className="font-mono text-[10px] text-muted tracking-[.2em] uppercase">
           Always learning
         </span>

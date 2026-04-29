@@ -10,19 +10,17 @@ export default function Contact() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Stagger info elements on the left
       gsap.from('.contact-left > div', {
         scrollTrigger: { trigger: sectionRef.current, start: 'top 85%' },
         opacity: 0, y: 30, duration: 1, stagger: 0.15, ease: 'power3.out',
       })
-      // Stagger form elements on the right
       gsap.from('.contact-right > div, form > div', {
         scrollTrigger: { trigger: sectionRef.current, start: 'top 85%' },
-        opacity: 0, 
-        y: 20, 
-        duration: 0.8, 
-        stagger: 0.1, 
-        ease: 'power3.out', 
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: 'power3.out',
         delay: 0.2,
       })
     }, sectionRef)
@@ -37,19 +35,17 @@ export default function Contact() {
     >
 
       {/* ── LEFT — dark info panel ── */}
-      <div className="contact-left bg-dark px-8 md:px-20 py-16 flex flex-col justify-between relative overflow-hidden min-h-[50vh] md:min-h-[70vh]">
-
-   
+      <div className="contact-left bg-dark px-6 sm:px-10 md:px-20 py-12 md:py-16 flex flex-col justify-between relative overflow-hidden min-h-[60vh] md:min-h-[70vh]">
 
         {/* Top */}
         <div>
-          <div className="flex items-center gap-3 font-mono text-[11px] text-[#555] tracking-[.15em] uppercase mb-12">
+          <div className="flex items-center gap-3 font-mono text-[11px] text-[#555] tracking-[.15em] uppercase mb-8 md:mb-12">
             <span className="w-6 h-px bg-[#555]" />
             Get in touch
           </div>
           <h2
             className="font-serif text-cream leading-[.92] tracking-tight"
-            style={{ fontSize: 'clamp(3.5rem, 6vw, 6rem)' }}
+            style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
           >
             Let&apos;s work
             <em className="block italic text-red2">together</em>
@@ -57,8 +53,8 @@ export default function Contact() {
         </div>
 
         {/* Mid */}
-        <div className="py-8 border-t border-b border-[#2a2a27]">
-          <div className="flex items-center gap-2 font-mono text-xs text-red2 mb-4">
+        <div className="py-6 md:py-8 border-t border-b border-[#2a2a27]">
+          <div className="flex items-center gap-2 font-mono text-xs text-red2 mb-3 md:mb-4">
             <span className="w-1.5 h-1.5 bg-red2 rounded-full animate-pulse" />
             Available for work
           </div>
@@ -71,13 +67,11 @@ export default function Contact() {
         {/* Links */}
         <div className="flex flex-col relative z-10">
           {[
-            // ✅ Replace with your real URLs
-            { label: 'GitHub',          href: 'https://github.com/maimuna-t-333/', icon: '↗' },
-            { label: 'LinkedIn',        href: 'https://www.linkedin.com/in/maimunah-tabassum/', icon: '↗' },
-            { label: '+880 1736 788394',href: 'tel:+8801736788394', icon: '→' },
+            { label: 'GitHub',           href: 'https://github.com/maimuna-t-333/', icon: '↗' },
+            { label: 'LinkedIn',         href: 'https://www.linkedin.com/in/maimunah-tabassum/', icon: '↗' },
+            { label: '+880 1736 788394', href: 'tel:+8801736788394', icon: '→' },
           ].map(l => (
-            <a
-              key={l.label}
+            <a key={l.label}
               href={l.href}
               target={l.href.startsWith('http') ? '_blank' : undefined}
               rel="noreferrer"
@@ -97,15 +91,16 @@ export default function Contact() {
       </div>
 
       {/* ── RIGHT — form ── */}
-      <div className="contact-right bg-cream2 px-8 md:px-20 py-16 flex flex-col justify-center">
+      <div className="contact-right bg-cream2 px-6 sm:px-10 md:px-20 py-12 md:py-16 flex flex-col justify-center">
 
-        <div className="font-mono text-[10px] text-muted tracking-[.2em] uppercase mb-8">
+        <div className="font-mono text-[10px] text-muted tracking-[.2em] uppercase mb-6 md:mb-8">
           Send a message
         </div>
 
-        <form className="flex flex-col gap-6" onSubmit={e => e.preventDefault()}>
+        <form className="flex flex-col gap-5 md:gap-6" onSubmit={e => e.preventDefault()}>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {/* Name + Email row */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
             {[
               { label: 'Name',  type: 'text',  placeholder: 'Your name' },
               { label: 'Email', type: 'email', placeholder: 'your@email.com' },
@@ -122,37 +117,43 @@ export default function Contact() {
                     py-3 text-[.95rem] text-ink outline-none
                     placeholder:text-border
                     focus:border-red transition-colors duration-200
+                    w-full
                   "
                 />
               </div>
             ))}
           </div>
 
+          {/* Message */}
           <div className="flex flex-col gap-2">
             <label className="font-mono text-[10px] text-muted tracking-[.12em] uppercase">
               Message
             </label>
             <textarea
-              rows={5}
+              rows={4}
               placeholder="Tell me about your project..."
               className="
                 bg-transparent border-0 border-b border-border
                 py-3 text-[.95rem] text-ink outline-none resize-none
                 placeholder:text-border
                 focus:border-red transition-colors duration-200
+                w-full
               "
             />
           </div>
 
-          <div className="flex items-center justify-between mt-2">
+          {/* Submit */}
+          <div className="flex items-center justify-between mt-2 flex-wrap gap-4">
             <button
               type="submit"
               className="
                 relative overflow-hidden
                 bg-dark text-cream
                 font-bold text-sm tracking-widest uppercase
-                px-8 py-3.5 rounded-full
-                group transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-red/10
+                px-6 py-3 md:px-8 md:py-3.5 rounded-full
+                group transition-all duration-300
+                hover:-translate-y-1 hover:shadow-xl hover:shadow-red/10
+                w-full sm:w-auto
               "
             >
               <span className="
@@ -167,11 +168,10 @@ export default function Contact() {
         </form>
 
         {/* Email fallback */}
-        <div className="mt-10 pt-8 border-t border-border">
-          <a
-            href="mailto:maimuna.tabr@gmail.com"
-            className="font-serif italic text-muted hover:text-red transition-colors duration-200"
-            style={{ fontSize: 'clamp(.9rem, 2vw, 1.1rem)' }}
+        <div className="mt-8 md:mt-10 pt-6 md:pt-8 border-t border-border">
+          <a href="mailto:maimuna.tabr@gmail.com"
+            className="font-serif italic text-muted hover:text-red transition-colors duration-200 break-all"
+            style={{ fontSize: 'clamp(.85rem, 2vw, 1.1rem)' }}
           >
             maimuna.tabr@gmail.com
           </a>

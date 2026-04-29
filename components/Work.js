@@ -13,7 +13,6 @@ const PROJECTS = [
     desc: 'AI-powered e-commerce platform with role-based dashboards for buyers, sellers, admins & delivery agents. Integrated AI chatbot, voice recognition, and real-time order tracking.',
     tags: ['Next.js','NextAuth','React','Node.js','Express','MongoDB','Stripe','Axios'],
     image: '/Smartshop.jpeg',
-    
     demo:   'https://smartshop-indol.vercel.app/',
     client: 'https://github.com/NazmulhaqueD/smart-shop',
     server: 'https://github.com/NazmulhaqueD/smart-shop-server',
@@ -59,7 +58,6 @@ export default function Work() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Each project row animates in
       gsap.utils.toArray('.proj-row').forEach((row, i) => {
         gsap.from(row, {
           scrollTrigger: { trigger: row, start: 'top 88%' },
@@ -76,45 +74,57 @@ export default function Work() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="work" className="bg-dark px-8 md:px-16 pt-10 pb-20 md:pt-16  md:pb-32">
-
-      {/* Header */}
-      <div className="flex justify-between items-baseline mb-10 border-b border-[#2a2a27] pb-6">
+    <section
+      ref={sectionRef}
+      id="work"
+      className="bg-dark px-5 md:px-16 pt-10 pb-16 md:pt-16 md:pb-32"
+    >
+      {/* ── Header ── */}
+      <div className="flex justify-between items-baseline mb-8 md:mb-10 border-b border-[#2a2a27] pb-5 md:pb-6">
         <h2
           className="font-serif text-cream leading-[0.95] tracking-tight"
-          style={{ fontSize: 'clamp(3rem, 6vw, 6rem)' }}
+          style={{ fontSize: 'clamp(2.4rem, 6vw, 6rem)' }}
         >
           Selected<br />
           <em className="text-red2 italic">Work</em>
         </h2>
-        <span className="font-mono text-xs text-[#555]">({PROJECTS.length} projects)</span>
+        <span className="font-mono text-[10px] md:text-xs text-[#555] self-end pb-1">
+          ({PROJECTS.length} projects)
+        </span>
       </div>
 
-      {/* Project rows */}
+      {/* ── Project rows ── */}
       <div>
         {PROJECTS.map(p => (
           <article
             key={p.num}
             className="
               proj-row
-              border-t border-[#2a2a27] py-12
-              grid grid-cols-1 md:grid-cols-[3.5rem_1fr_280px_14rem] gap-8 items-start
+              border-t border-[#2a2a27]
+              py-8 md:py-12
+              grid grid-cols-1 md:grid-cols-[3.5rem_1fr_280px_14rem]
+              gap-5 md:gap-8
+              items-start
               group
               transition-all duration-300 ease-out
               md:hover:pl-6 -ml-1
             "
           >
-            {/* Number */}
+            {/* Number — desktop only */}
             <div className="font-mono text-xs text-[#444] pt-1 group-hover:text-red2 transition-colors hidden md:block">
               {p.num}
             </div>
 
-            {/* Text */}
+            {/* ── Text block ── */}
             <div>
-              <h3 className="font-serif text-cream text-4xl leading-tight mb-3 group-hover:text-red2 transition-colors duration-200">
-                <span className="md:hidden text-xs font-mono text-red2 mr-2 align-middle">{p.num}</span>{p.name}
+              {/* Mobile: number badge inline with title */}
+              <h3 className="font-serif text-cream text-3xl md:text-4xl leading-tight mb-2.5 md:mb-3 group-hover:text-red2 transition-colors duration-200">
+                <span className="md:hidden font-mono text-[10px] text-red2 mr-2 align-middle tracking-wider">
+                  {p.num}
+                </span>
+                {p.name}
               </h3>
-              <p className="text-sm text-[#666] leading-relaxed max-w-lg mb-5">
+              <p className="text-sm text-[#666] leading-relaxed max-w-lg mb-4 md:mb-5">
                 {p.desc}
               </p>
               <div className="flex flex-wrap gap-1.5">
@@ -129,9 +139,8 @@ export default function Work() {
               </div>
             </div>
 
-            {/* Screenshot */}
-            {/* ✅ Add screenshots to public/projects/ */}
-            <div className="overflow-hidden rounded border border-[#2a2a27] h-48 md:h-40 relative">
+            {/* ── Screenshot ── */}
+            <div className="overflow-hidden rounded border border-[#2a2a27] h-44 md:h-40 relative">
               <Image
                 src={p.image}
                 alt={p.name}
@@ -141,8 +150,14 @@ export default function Work() {
               />
             </div>
 
-            {/* Links */}
-            <div className="flex flex-row md:flex-col items-center md:items-end gap-6 md:gap-3 border-t border-[#2a2a27] md:border-0 mt-4 md:mt-0 pt-6 md:pt-1">
+            {/* ── Links ── */}
+            <div className="
+              flex flex-row flex-wrap md:flex-col
+              items-start md:items-end
+              gap-x-5 gap-y-3 md:gap-3
+              border-t border-[#2a2a27] md:border-0
+              pt-5 md:pt-1 mt-1 md:mt-0
+            ">
               {[
                 { label: 'Live demo ↗',   href: p.demo   },
                 { label: 'Client repo ↗', href: p.client },
@@ -158,7 +173,9 @@ export default function Work() {
                   {l.label}
                 </a>
               ))}
-              <span className="font-mono text-xs text-[#333] mt-auto">{p.year}</span>
+              <span className="font-mono text-xs text-[#333] md:mt-auto w-full md:w-auto text-left md:text-right">
+                {p.year}
+              </span>
             </div>
           </article>
         ))}

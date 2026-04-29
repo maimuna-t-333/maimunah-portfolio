@@ -55,11 +55,10 @@ function MagneticBtn({ href, children }) {
         relative inline-block overflow-hidden
         bg-dark text-cream
         font-sans font-bold text-sm tracking-widest uppercase
-        px-10 py-4 rounded-full
+        px-8 py-3 md:px-10 md:py-4 rounded-full
         group
       "
     >
-      {/* Red fill slides in on hover */}
       <span className="
         absolute inset-0 bg-red rounded-full
         scale-x-0 group-hover:scale-x-100
@@ -81,11 +80,9 @@ export default function Hero() {
   const ringRef    = useRef(null)
   const circleRef  = useRef(null)
 
-  // Scramble on name spans
   useScramble(line1Ref, 'Maimunah', 300)
   useScramble(line2Ref, 'Tabassum', 700)
 
-  // GSAP page load animation
   useEffect(() => {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
@@ -99,35 +96,44 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="min-h-screen grid grid-rows-[1fr_auto] px-16 pt-32 relative overflow-hidden"
+      // pt-14 on mobile (was pt-24) for less top breathing room
+      className="min-h-screen grid grid-rows-[1fr_auto] px-6 md:px-16 pt-14 md:pt-32 relative overflow-hidden"
     >
-      {/* Decorative floating circle */}
+      {/* Decorative circles — hidden on mobile for cleaner look */}
       <div ref={circleRef} className="
+        hidden md:block
         absolute right-24 top-1/2 -translate-y-2/3
-        w-96 h-96 rounded-full bg-red opacity-[0.07]
+        w-64 h-64 lg:w-96 lg:h-96 rounded-full bg-red opacity-[0.07]
         animate-[float_6s_ease-in-out_infinite]
         pointer-events-none
       " />
-      {/* Spinning ring */}
       <div ref={ringRef} className="
+        hidden md:block
         absolute right-12 top-1/2 -translate-y-2/3
-        w-[560px] h-[560px] rounded-full border border-border
+        w-[380px] h-[380px] lg:w-[560px] lg:h-[560px]
+        rounded-full border border-border
         animate-[spin_24s_linear_infinite]
         pointer-events-none
       " />
 
-      {/* ── TOP: text + photo ── */}
-      <div className="relative z-10 flex flex-col items-center text-center">
+      {/* ── TOP: text ── */}
+      <div className="relative z-10 flex flex-col items-center text-center justify-center">
         <div className="flex flex-col items-center">
           <p
             ref={eyebrowRef}
-            className="font-mono text-lg text-muted tracking-[0.15em] mb-8"
+            // mb-3 on mobile (was mb-6) — less gap between designation and name
+            className="font-mono text-xs md:text-sm lg:text-lg text-muted tracking-[0.12em] md:tracking-[0.15em] mb-3 md:mb-8 px-4 md:px-0"
           >
-            Frontend Developer — MERN Stack — Sylhet, Bangladesh
+            {/* Short version on mobile, full on desktop */}
+            <span className="md:hidden">Frontend Dev — MERN Stack — Sylhet</span>
+            <span className="hidden md:inline">Frontend Developer — MERN Stack — Sylhet, Bangladesh</span>
           </p>
 
-          <h1 className="font-serif leading-[0.9] tracking-tight" aria-label="Maimunah Tabassum"
-              style={{ fontSize: 'clamp(5rem, 11vw, 11rem)' }}>
+          <h1
+            className="font-serif leading-[0.9] tracking-tight"
+            aria-label="Maimunah Tabassum"
+            style={{ fontSize: 'clamp(3.5rem, 11vw, 11rem)' }}
+          >
             <span ref={line1Ref} className="block">Maimunah</span>
             <span ref={line2Ref} className="block italic text-red">Tabassum</span>
           </h1>
@@ -137,27 +143,37 @@ export default function Hero() {
       {/* ── BOTTOM strip ── */}
       <div
         ref={bottomRef}
-        className="border-t border-border py-8 grid grid-cols-3 gap-8 items-end relative z-10"
+        className="
+          border-t border-border
+          py-6 md:py-8
+          grid grid-cols-1 md:grid-cols-3
+          gap-5 md:gap-8
+          items-center md:items-end
+          relative z-10
+        "
       >
-        <p className="text-sm text-muted leading-relaxed">
-          <strong className="text-ink text-xl font-bold">Frontend-focused MERN Stack Developer</strong>{' '}
-          building full-stack web applications with clean code and thoughtful UX.
+        {/* Bio */}
+        <p className="text-sm text-muted leading-relaxed text-center md:text-left">
+          <strong className="text-ink text-base md:text-xl font-bold block mb-1">
+            Frontend-focused MERN Stack Developer
+          </strong>
+          Building full-stack web applications with clean code and thoughtful UX.
           Open to freelance &amp; collaboration.
         </p>
 
+        {/* CTA Button */}
         <div className="flex justify-center">
           <MagneticBtn href="#work">View my work ↓</MagneticBtn>
         </div>
 
-        <div className="font-mono text-xs text-muted text-right leading-loose">
+        {/* Location / contact */}
+        <div className="font-mono text-xs text-muted text-center md:text-right leading-loose">
           Sylhet, Bangladesh<br />
-          {/* ✅ Replace with your real email */}
           maimuna.tabr@gmail.com<br />
           +880 1736 788394
         </div>
       </div>
 
-      {/* Float + spin keyframes */}
       <style>{`
         @keyframes float {
           0%, 100% { transform: translateY(-66%) scale(1); }
