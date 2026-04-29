@@ -5,7 +5,7 @@ import gsap from 'gsap'
 // ── Scramble Text ─────────────────────────────────────────────
 function useScramble(ref, text, delay = 0) {
   useEffect(() => {
-    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$'
+    const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
     let iter = 0
     let interval
 
@@ -22,8 +22,8 @@ function useScramble(ref, text, delay = 0) {
           .join('')
 
         if (iter >= text.length) clearInterval(interval)
-        iter += 0.4
-      }, 40)
+        iter += 0.5
+      }, 60)
     }, delay)
 
     return () => { clearTimeout(timeout); clearInterval(interval) }
