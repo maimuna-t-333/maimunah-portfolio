@@ -97,19 +97,20 @@ export default function Contact() {
           Send a message
         </div>
 
-        <form className="flex flex-col gap-5 md:gap-6" onSubmit={e => e.preventDefault()}>
+        <form action='https://formspree.io/f/mgodwodk' method="POST" className="flex flex-col gap-5 md:gap-6" >
 
           {/* Name + Email row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
             {[
-              { label: 'Name',  type: 'text',  placeholder: 'Your name' },
-              { label: 'Email', type: 'email', placeholder: 'your@email.com' },
+              { name:'name', label: 'Name',  type: 'text',  placeholder: 'Your name' },
+              { name:'email', label: 'Email', type: 'email', placeholder: 'your@email.com' },
             ].map(f => (
               <div key={f.label} className="flex flex-col gap-2">
                 <label className="font-mono text-[10px] text-muted tracking-[.12em] uppercase">
                   {f.label}
                 </label>
                 <input
+                name={f.name}
                   type={f.type}
                   placeholder={f.placeholder}
                   className="
@@ -119,6 +120,7 @@ export default function Contact() {
                     focus:border-red transition-colors duration-200
                     w-full
                   "
+                  required
                 />
               </div>
             ))}
@@ -130,6 +132,7 @@ export default function Contact() {
               Message
             </label>
             <textarea
+            name='massage'
               rows={4}
               placeholder="Tell me about your project..."
               className="
@@ -139,6 +142,7 @@ export default function Contact() {
                 focus:border-red transition-colors duration-200
                 w-full
               "
+              required
             />
           </div>
 
